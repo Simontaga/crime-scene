@@ -11,11 +11,13 @@ import googleMap from "../components/GoogleMap/googleMap";
 import getAllEventLocations from "../utils/getAllEventLocations";
 import ILocation from "../interfaces/IGPSLocation";
 import getCountAllEvents from "../utils/getCountAllEvents";
+import createRedisManager from "../lib/createRedisManager";
 
 export async function getServerSideProps() {
-  const latestEvents = await getLatestEvents();
-  const eventLocations = await getAllEventLocations();
-  const eventCount = await getCountAllEvents();
+  const redisManager = await createRedisManager();
+  const latestEvents = await getLatestEvents(redisManager);
+  const eventLocations = await getAllEventLocations(redisManager);
+  const eventCount = await getCountAllEvents(redisManager);
 
   return {
     props: {
