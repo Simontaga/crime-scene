@@ -1,5 +1,15 @@
+@import '../config/breakpoints';
+
 .topInfo {
     display: grid;
     row-gap: 1.25rem;
     margin-bottom: 1.25rem;
+}
+
+
+@media all and (min-width: $breakpoint-tablet) {
+    .topInfo {
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 1.25rem;
+    }
 }

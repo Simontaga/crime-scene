@@ -12,6 +12,7 @@ const googleMap: FunctionComponent<{ events: IGPSLocation[]; apiKey: string, map
   const googlemap = useRef(null);
 
   useEffect(() => {
+    console.log(component.map);
     const loader = new Loader({
       apiKey: apiKey,
       version: "weekly",
@@ -26,7 +27,6 @@ const googleMap: FunctionComponent<{ events: IGPSLocation[]; apiKey: string, map
         streetViewControl: false,
         mapTypeControl: false
       });
-      console.log(events);
       let heatMap = new google.maps.visualization.HeatmapLayer({
         data: events.map((e: IGPSLocation) => new google.maps.LatLng(e.lat, e.long)),
       });

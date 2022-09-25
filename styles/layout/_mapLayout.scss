@@ -1,3 +1,11 @@
+@import '../config/breakpoints';
+
 .mapLayout {
     margin-bottom: 1.75rem;
+}
+
+@media all and (min-width: $breakpoint-tablet) {
+    .mapLayout {
+        height: 100%;
+    }
 }

@@ -9,7 +9,7 @@ const getLatestEvents = async() => {
                 eventID: 'desc',
             },
         ],
-        take: 10,
+        take: 5,
     });
 
     return result;

@@ -10,27 +10,31 @@ import IEvent from "../interfaces/IEvent";
 import googleMap from "../components/GoogleMap/googleMap";
 import getAllEventLocations from "../utils/getAllEventLocations";
 import ILocation from "../interfaces/IGPSLocation";
+import getCountAllEvents from "../utils/getCountAllEvents";
 
 export async function getServerSideProps() {
   const latestEvents = await getLatestEvents();
   const eventLocations = await getAllEventLocations();
+  const eventCount = await getCountAllEvents();
 
   return {
     props: {
       latestEvents: JSON.parse(JSON.stringify(latestEvents)),
       gMapsKey: process.env.GOOGLE_MAPS,
       mapId: process.env.MAP_ID,
-      eventLocations: JSON.parse(JSON.stringify(eventLocations))
+      eventLocations: JSON.parse(JSON.stringify(eventLocations)),
+      eventCount: eventCount,
     },
   };
 }
 
-const Home: NextPage<{ latestEvents: IEvent[]; gMapsKey: string, mapId: string, eventLocations: ILocation[] }> = ({
-  latestEvents,
-  gMapsKey,
-  mapId,
-  eventLocations,
-}) => {
+const Home: NextPage<{
+  latestEvents: IEvent[];
+  gMapsKey: string;
+  mapId: string;
+  eventLocations: ILocation[];
+  eventCount: number;
+}> = ({ latestEvents, gMapsKey, mapId, eventLocations, eventCount }) => {
   return (
     <div>
       <Head>
@@ -40,16 +44,26 @@ const Home: NextPage<{ latestEvents: IEvent[]; gMapsKey: string, mapId: string, 
       </Head>
 
       <main className={styles.page}>
-        <section className={layout.topInfo}>
-          {smallInfo({ title: "Total events archived", secondary: "12056" })}
-          {smallInfo({ title: "Last updated", secondary: "5 Minutes ago" })}
-        </section>
-        <section className={layout.mapLayout}>
-          {googleMap({ events: eventLocations, apiKey: gMapsKey, mapId: mapId })}
-        </section>
-        <aside>
-          {recentEvents({ title: "Latest events", events: latestEvents })}
-        </aside>
+        <div className={layout.topHalf}>
+          <div className={layout.topHalf__main}>
+          <section className={layout.topInfo}>
+            {smallInfo({ title: "Total events archived", secondary: eventCount })}
+            {smallInfo({ title: "Last updated", secondary: "5 Minutes ago" })}
+          </section>
+
+          <section className={layout.mapLayout}>
+            {googleMap({
+              events: eventLocations,
+              apiKey: gMapsKey,
+              mapId: mapId,
+            })}
+          </section>
+          </div>
+          
+          <aside className={layout.topHalf__aside}>
+            {recentEvents({ title: "Latest events", events: latestEvents })}
+          </aside>
+        </div>
       </main>
 
       <footer className={styles.footer}>
