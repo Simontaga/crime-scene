@@ -1,18 +1,26 @@
 @import '../../styles/config/breakpoints';
+@import '../../styles/config/colors';
 
 .smallInfo {
-    color: purple;
-    padding: 1.875rem 2.375rem;
-}
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-@media all and (min-width: $breakpoint-tablet) {
-    .smallInfo {
-        color: red;
+    p {
+        margin: 0;
+        color: $color-text;
+    }
+
+    &__secondary {
+        background-color: $color-secondary;
+        padding: .5rem 1.5625rem;
+        border-radius: .5rem;
     }
 }
 
 @media all and (min-width: $breakpoint-desktop) {
     .smallInfo {
-        color: green;
+        padding: 2.5625rem 1.6875rem;
     }
 }

@@ -14,7 +14,8 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.page}>
-        {smallInfo()}
+        {smallInfo({title: 'Total events archived', secondary: '12056'})}
+        {smallInfo({title: 'Last updated', secondary: '5 Minutes ago'})}
       </main>
 
       <footer className={styles.footer}>
