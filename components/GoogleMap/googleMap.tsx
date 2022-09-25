@@ -4,9 +4,10 @@ import { Loader } from "@googlemaps/js-api-loader";
 import IEvent from "../../interfaces/IEvent";
 import component from "../GoogleMap/googleMap.module.scss";
 
-
-
-const googleMap: FunctionComponent<{ events: IEvent[], apiKey: string }> = ( { events, apiKey } ) => {
+const googleMap: FunctionComponent<{ events: IEvent[]; apiKey: string }> = ({
+  events,
+  apiKey,
+}) => {
   const googlemap = useRef(null);
 
   useEffect(() => {
@@ -25,7 +26,9 @@ const googleMap: FunctionComponent<{ events: IEvent[], apiKey: string }> = ( { e
 
   return (
     <div className={`${styles.container} ${component.map}`}>
-      <div className={component.map__inner} id="map" ref={googlemap}></div>
+      <div className={component.map__inner}>
+        <div className={component.map__map} id="map" ref={googlemap}></div>
+      </div>
     </div>
   );
 };

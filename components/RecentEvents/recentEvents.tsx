@@ -6,6 +6,7 @@ import { FunctionComponent } from 'react';
 const recentEvents: FunctionComponent<{ title: string, events: IEvent[]}> = ({ title, events}) => {
     return(
         <div className={`${styles.container} ${component.recentEvents}`}>
+            <div className={`${styles.container__inner} ${component.recentEvents__inner}`}>
             <p className={component.recentEvents__title}>{title}</p>
             {events.map((event,index) => {
                 return (
@@ -15,6 +16,7 @@ const recentEvents: FunctionComponent<{ title: string, events: IEvent[]}> = ({ t
                     </div>
                 );
             })}
+            </div>
         </div>
     )
 }

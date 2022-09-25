@@ -34,7 +34,7 @@ const Home: NextPage<{ latestEvents: IEvent[], gMapsKey: string }> = ({ latestEv
           {smallInfo({ title: "Total events archived", secondary: "12056" })}
           {smallInfo({ title: "Last updated", secondary: "5 Minutes ago" })}
         </section>
-        <section>
+        <section className={layout.mapLayout}>
           {googleMap({ events: latestEvents, apiKey: gMapsKey })}
         </section>
         <aside>

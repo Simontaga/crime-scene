@@ -5,4 +5,8 @@
     background-color: $color-light-gray;
     border-radius: .5rem;
     box-shadow: $shadow;
+
+    &__inner {
+        padding: 1.875rem 1.25rem;
+    }
 }
