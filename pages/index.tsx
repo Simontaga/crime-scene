@@ -50,8 +50,8 @@ const Home: NextPage<{
         <meta name="description" content="Police events, heatmap and statisics" />
         <link rel="icon" href="/favicon.ico" />
         <style>
-@import url('https://fonts.googleapis.com/css2?family=Manjari&display=swap');
-</style>
+        @import url("https://fonts.googleapis.com/css2?family=Manjari&display=swap");
+        </style>
       </Head>
 
       <main className={styles.page}>
