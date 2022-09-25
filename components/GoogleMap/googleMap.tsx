@@ -4,9 +4,10 @@ import { Loader } from "@googlemaps/js-api-loader";
 import IEvent from "../../interfaces/IEvent";
 import component from "../GoogleMap/googleMap.module.scss";
 
-const googleMap: FunctionComponent<{ events: IEvent[]; apiKey: string }> = ({
+const googleMap: FunctionComponent<{ events: IEvent[]; apiKey: string, mapId: string }> = ({
   events,
   apiKey,
+  mapId,
 }) => {
   const googlemap = useRef(null);
 
@@ -20,6 +21,9 @@ const googleMap: FunctionComponent<{ events: IEvent[]; apiKey: string }> = ({
       map = new google.maps.Map(googlemap.current, {
         center: { lat: -34.397, lng: 150.644 },
         zoom: 8,
+        mapId: mapId,
+        streetViewControl: false,
+        mapTypeControl: false
       });
     });
   });

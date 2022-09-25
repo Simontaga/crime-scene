@@ -2,25 +2,32 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Entry.module.scss";
-import layout from '../styles/Layout.module.scss';
+import layout from "../styles/Layout.module.scss";
 import smallInfo from "../components/SmallInfo/smallInfo";
 import recentEvents from "../components/RecentEvents/recentEvents";
 import getLatestEvents from "../utils/getLatestEvents";
 import IEvent from "../interfaces/IEvent";
 import { useEffect, useRef } from "react";
-import { Loader } from '@googlemaps/js-api-loader';
+import { Loader } from "@googlemaps/js-api-loader";
 import googleMap from "../components/GoogleMap/googleMap";
 
 export async function getServerSideProps() {
   const latestEvents = await getLatestEvents();
 
   return {
-    props: { latestEvents: JSON.parse(JSON.stringify(latestEvents)), gMapsKey: process.env.GOOGLE_MAPS },
+    props: {
+      latestEvents: JSON.parse(JSON.stringify(latestEvents)),
+      gMapsKey: process.env.GOOGLE_MAPS,
+      mapId: process.env.MAP_ID,
+    },
   };
 }
 
-const Home: NextPage<{ latestEvents: IEvent[], gMapsKey: string }> = ({ latestEvents, gMapsKey }) => {
-
+const Home: NextPage<{ latestEvents: IEvent[]; gMapsKey: string, mapId: string }> = ({
+  latestEvents,
+  gMapsKey,
+  mapId
+}) => {
   return (
     <div>
       <Head>
@@ -35,7 +42,7 @@ const Home: NextPage<{ latestEvents: IEvent[], gMapsKey: string }> = ({ latestEv
           {smallInfo({ title: "Last updated", secondary: "5 Minutes ago" })}
         </section>
         <section className={layout.mapLayout}>
-          {googleMap({ events: latestEvents, apiKey: gMapsKey })}
+          {googleMap({ events: latestEvents, apiKey: gMapsKey, mapId: mapId })}
         </section>
         <aside>
           {recentEvents({ title: "Latest events", events: latestEvents })}
