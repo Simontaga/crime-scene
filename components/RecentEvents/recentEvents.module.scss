@@ -21,11 +21,21 @@
         padding: 1rem 1.875rem;
         color: $color-text;
         box-shadow: $shadow;
+        text-decoration: none;
+        transition: all 150ms;
 
         p {
             margin: 0;
+            padding-left: .75rem;
         }
 
         margin-bottom: 1.125rem;
+
+        &:hover {
+            transition: all 150ms;
+            animation-direction:alternate;
+            scale: 1.025;
+            border-color: $color-secondary;
+        }
     }
 }

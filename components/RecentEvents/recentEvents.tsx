@@ -10,10 +10,10 @@ const recentEvents: FunctionComponent<{ title: string, events: IEvent[]}> = ({ t
             <p className={component.recentEvents__title}>{title}</p>
             {events.map((event,index) => {
                 return (
-                    <div key={index} className={component.recentEvents__event}>
+                    <a key={index} className={component.recentEvents__event} href={`https://polisen.se${event.url}`}>
                         <p>{event.type}</p>
-                        <p>{event.locationName}</p>
-                    </div>
+                        <p>({event.locationName})</p>
+                    </a>
                 );
             })}
             </div>

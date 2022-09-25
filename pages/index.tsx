@@ -12,14 +12,16 @@ import getAllEventLocations from "../utils/getAllEventLocations";
 import ILocation from "../interfaces/IGPSLocation";
 import getCountAllEvents from "../utils/getCountAllEvents";
 import createRedisManager from "../lib/createRedisManager";
-import { createClient, RedisClientType } from 'redis';
-
+import getLatestEventUpdate from "../utils/getLatestEventUpdate";
+import Event from "../models/event";
+import moment from 'moment';
 
 export async function getServerSideProps() {
   const redisManager = await createRedisManager();
   const latestEvents = await getLatestEvents(redisManager);
   const eventLocations = await getAllEventLocations(redisManager);
   const eventCount = await getCountAllEvents(redisManager);
+  const latestUpdate = await getLatestEventUpdate(redisManager);
 
   return {
     props: {
@@ -28,6 +30,7 @@ export async function getServerSideProps() {
       mapId: process.env.MAP_ID,
       eventLocations: JSON.parse(JSON.stringify(eventLocations)),
       eventCount: eventCount,
+      latestUpdate,
     },
   };
 }
@@ -38,7 +41,8 @@ const Home: NextPage<{
   mapId: string;
   eventLocations: ILocation[];
   eventCount: number;
-}> = ({ latestEvents, gMapsKey, mapId, eventLocations, eventCount }) => {
+  latestUpdate: Event;
+}> = ({ latestEvents, gMapsKey, mapId, eventLocations, eventCount, latestUpdate }) => {
   return (
     <div>
       <Head>
@@ -52,7 +56,7 @@ const Home: NextPage<{
           <div className={layout.topHalf__main}>
           <section className={layout.topInfo}>
             {smallInfo({ title: "Total events archived", secondary: eventCount })}
-            {smallInfo({ title: "Last updated", secondary: "5 Minutes ago" })}
+            {smallInfo({ title: "Last update", secondary: `${moment(latestUpdate.datetime).fromNow()}` })}
           </section>
 
           <section className={layout.mapLayout}>
