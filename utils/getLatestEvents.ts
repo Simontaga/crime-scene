@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import Event from '../models/event';
+import redisConfig from './redisConfig';
 const prisma = new PrismaClient();
 
 const getLatestEvents= async(redisClient: any): Promise<Event[]> =>  {
@@ -17,7 +18,7 @@ const getLatestEvents= async(redisClient: any): Promise<Event[]> =>  {
         take: 5,
     });
 
-    await redisClient.set('lastest_events', JSON.stringify(result));
+    await redisClient.set('latest_events', JSON.stringify(result), redisConfig);
 
     return result;
 }

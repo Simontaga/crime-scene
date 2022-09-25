@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import Event from '../models/event';
+import redisConfig from './redisConfig';
 
 const prisma = new PrismaClient();
 
@@ -9,7 +10,7 @@ const getAllEvents = async(redisClient: any): Promise<Event[]> => {
 
 
     const result = await prisma.event.findMany();
-    await redisClient.set('all_events', JSON.stringify(result));
+    await redisClient.set('all_events', JSON.stringify(result), redisConfig);
     
     return result;
 }

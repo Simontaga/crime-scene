@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client'
+import redisConfig from './redisConfig';
 const prisma = new PrismaClient();
 
 const getCountAllEvents = async(redisClient: any): Promise<number> => {
@@ -7,7 +8,7 @@ const getCountAllEvents = async(redisClient: any): Promise<number> => {
 
     const result = await prisma.event.count();
 
-    await redisClient.set('event_count', JSON.stringify(result));
+    await redisClient.set('event_count', JSON.stringify(result), redisConfig);
     return result;
 }
 

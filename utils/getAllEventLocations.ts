@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import GPSLocation from '../models/GPSLocation';
+import redisConfig from './redisConfig';
 
 const prisma = new PrismaClient();
 
@@ -15,7 +16,7 @@ const getAllEventLocations = async(redisClient: any): Promise<GPSLocation[]> => 
     
     const data =  result.map((location) => new GPSLocation(location.locationGps));
 
-    await redisClient.set('all_event_locations', JSON.stringify(data));
+    await redisClient.set('all_event_locations', JSON.stringify(data), redisConfig);
     
     return data;
 }
