@@ -1,0 +1,32 @@
+@import '../../styles/config/colors';
+
+.recentEvents {
+    padding: 2.5rem 1.25rem 0 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &__title {
+        text-align: center;
+        margin-bottom: 5.25rem;
+        color: $color-text;
+    }
+
+    &__event {
+        display: flex;
+        justify-content: space-between;
+        border: .0625rem solid;
+        border-color: $color-third;
+        border-radius: .5rem;
+        padding: 1rem 1.875rem;
+        color: $color-text;
+
+        p {
+            margin: 0;
+        }
+
+        &:not(:last-child) {
+            margin-bottom: 1.125rem;
+        }
+    }
+}
