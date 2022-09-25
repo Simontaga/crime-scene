@@ -65,7 +65,7 @@ const Home: NextPage<{
           </div>
           
           <aside className={layout.topHalf__aside}>
-            {recentEvents({ title: "Latest events", events: latestEvents })}
+            {recentEvents({ title: "Recent events", events: latestEvents })}
           </aside>
         </div>
       </main>

@@ -1,5 +1,6 @@
 @import '../../styles/config/colors';
 @import '../../styles//config/special';
+@import '../../styles/config/breakpoints';
 
 .recentEvents {
     display: flex;
@@ -8,7 +9,7 @@
 
     &__title {
         text-align: center;
-        margin-bottom: 5.25rem;
+        margin-bottom: 2rem;
         color: $color-text;
     }
 
@@ -36,6 +37,14 @@
             animation-direction:alternate;
             scale: 1.025;
             border-color: $color-secondary;
+        }
+    }
+}
+
+@media all and (min-width: $breakpoint-tablet) {
+    .recentEvents {
+        &__title {
+            margin-bottom: 3.5rem;
         }
     }
 }
