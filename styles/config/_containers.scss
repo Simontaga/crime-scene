@@ -1,0 +1,8 @@
+@import '../config/colors';
+@import '../config/special';
+
+.container {
+    background-color: $light-gray;
+    border-radius: .5rem;
+    box-shadow: $shadow;
+}

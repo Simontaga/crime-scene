@@ -1,0 +1,14 @@
+@import '../config/breakpoints';
+
+$padding-body: 1rem .5rem 0 .5rem;
+$padding-body-desktop: 1rem 1.5rem 0 1.5rem;
+
+.page {
+    padding: $padding-body;
+}
+
+@media all and (min-width: $breakpoint-desktop) {
+    .page {
+        padding: $padding-body-desktop;
+    }
+}

@@ -1,0 +1,18 @@
+@import '../../styles/config/breakpoints';
+
+.smallInfo {
+    color: purple;
+    padding: 1.875rem 2.375rem;
+}
+
+@media all and (min-width: $breakpoint-tablet) {
+    .smallInfo {
+        color: red;
+    }
+}
+
+@media all and (min-width: $breakpoint-desktop) {
+    .smallInfo {
+        color: green;
+    }
+}
