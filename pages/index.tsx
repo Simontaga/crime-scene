@@ -7,26 +7,29 @@ import smallInfo from "../components/SmallInfo/smallInfo";
 import recentEvents from "../components/RecentEvents/recentEvents";
 import getLatestEvents from "../utils/getLatestEvents";
 import IEvent from "../interfaces/IEvent";
-import { useEffect, useRef } from "react";
-import { Loader } from "@googlemaps/js-api-loader";
 import googleMap from "../components/GoogleMap/googleMap";
+import getAllEventLocations from "../utils/getAllEventLocations";
+import ILocation from "../interfaces/IGPSLocation";
 
 export async function getServerSideProps() {
   const latestEvents = await getLatestEvents();
+  const eventLocations = await getAllEventLocations();
 
   return {
     props: {
       latestEvents: JSON.parse(JSON.stringify(latestEvents)),
       gMapsKey: process.env.GOOGLE_MAPS,
       mapId: process.env.MAP_ID,
+      eventLocations: JSON.parse(JSON.stringify(eventLocations))
     },
   };
 }
 
-const Home: NextPage<{ latestEvents: IEvent[]; gMapsKey: string, mapId: string }> = ({
+const Home: NextPage<{ latestEvents: IEvent[]; gMapsKey: string, mapId: string, eventLocations: ILocation[] }> = ({
   latestEvents,
   gMapsKey,
-  mapId
+  mapId,
+  eventLocations,
 }) => {
   return (
     <div>
@@ -42,7 +45,7 @@ const Home: NextPage<{ latestEvents: IEvent[]; gMapsKey: string, mapId: string }
           {smallInfo({ title: "Last updated", secondary: "5 Minutes ago" })}
         </section>
         <section className={layout.mapLayout}>
-          {googleMap({ events: latestEvents, apiKey: gMapsKey, mapId: mapId })}
+          {googleMap({ events: eventLocations, apiKey: gMapsKey, mapId: mapId })}
         </section>
         <aside>
           {recentEvents({ title: "Latest events", events: latestEvents })}
