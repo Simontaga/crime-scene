@@ -7,7 +7,7 @@ import smallInfo from "../components/SmallInfo/smallInfo";
 import recentEvents from "../components/RecentEvents/recentEvents";
 import getLatestEvents from "../utils/getLatestEvents";
 import IEvent from "../interfaces/IEvent";
-import googleMap from "../components/GoogleMap/googleMap";
+import GoogleMap from "../components/GoogleMap/GoogleMap";
 import getAllEventLocations from "../utils/getAllEventLocations";
 import ILocation from "../interfaces/IGPSLocation";
 import getCountAllEvents from "../utils/getCountAllEvents";
@@ -54,11 +54,7 @@ const Home: NextPage<{
           </section>
 
           <section className={layout.mapLayout}>
-            {googleMap({
-              events: eventLocations,
-              apiKey: gMapsKey,
-              mapId: mapId,
-            })}
+            <GoogleMap events={eventLocations} apiKey={gMapsKey} mapId={mapId}/>
           </section>
           </div>
           

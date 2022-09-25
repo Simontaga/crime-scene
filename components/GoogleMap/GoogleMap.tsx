@@ -4,7 +4,7 @@ import { Loader } from "@googlemaps/js-api-loader";
 import component from "../GoogleMap/googleMap.module.scss";
 import IGPSLocation from "../../interfaces/IGPSLocation";
 
-const googleMap: FunctionComponent<{ events: IGPSLocation[]; apiKey: string, mapId: string }> = ({
+const GoogleMap: FunctionComponent<{ events: IGPSLocation[]; apiKey: string, mapId: string }> = ({
   events,
   apiKey,
   mapId,
@@ -45,4 +45,4 @@ const googleMap: FunctionComponent<{ events: IGPSLocation[]; apiKey: string, map
   );
 };
 
-export default googleMap;
+export default GoogleMap;
