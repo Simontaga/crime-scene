@@ -1,9 +1,8 @@
 import { PrismaClient } from '@prisma/client'
-import IEvent from '../interfaces/IEvent';
+import Event from '../models/event';
 const prisma = new PrismaClient();
-import { RedisClientType } from '@redis/client/dist/lib/client';
 
-const getLatestEvents = async(redisClient: RedisClientType) => {
+const getLatestEvents= async(redisClient: any): Promise<Event[]> =>  {
 
     const cache = await redisClient.get('latest_events');
     if (cache !== null) return JSON.parse(cache);

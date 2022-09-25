@@ -12,6 +12,8 @@ import getAllEventLocations from "../utils/getAllEventLocations";
 import ILocation from "../interfaces/IGPSLocation";
 import getCountAllEvents from "../utils/getCountAllEvents";
 import createRedisManager from "../lib/createRedisManager";
+import { createClient, RedisClientType } from 'redis';
+
 
 export async function getServerSideProps() {
   const redisManager = await createRedisManager();

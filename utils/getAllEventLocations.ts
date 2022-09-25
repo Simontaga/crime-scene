@@ -1,10 +1,9 @@
 import { PrismaClient } from '@prisma/client'
 import GPSLocation from '../models/GPSLocation';
-import { RedisClientType } from '@redis/client/dist/lib/client';
 
 const prisma = new PrismaClient();
 
-const getAllEventLocations = async(redisClient: RedisClientType) => {
+const getAllEventLocations = async(redisClient: any): Promise<GPSLocation[]> => {
     const cache = await redisClient.get('all_event_locations');
     if (cache !== null) return JSON.parse(cache);
 
