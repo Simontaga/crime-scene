@@ -19,7 +19,7 @@ const GoogleMap: FunctionComponent<{ events: IGPSLocation[]; apiKey: string, map
     });
     let map;
     loader.load().then(() => {
-      map = new google.maps.Map(googlemap.current, {
+      map = new google.maps.Map(document.getElementById('map') as HTMLElement, {
         center: { lat: 61.9905343, lng: 21.1580683 },
         zoom: 3.8,
         mapId: mapId,
